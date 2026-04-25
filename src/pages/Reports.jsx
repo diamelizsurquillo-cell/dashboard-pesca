@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { kpiData } from '../data/mockData';
 import { Download } from 'lucide-react';
@@ -10,37 +10,40 @@ const Reports = () => {
   const reportRef = useRef();
 
   const exportPDF = async () => {
-    const element = reportRef.current;
-    
-    // Temporarily remove glassmorphism for clean PDF export if needed
-    // But html2canvas handles it okay, sometimes backgrounds get weird
-    const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
-    const data = canvas.toDataURL('image/png');
+    try {
+      const element = reportRef.current;
+      
+      const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
+      const data = canvas.toDataURL('image/png');
 
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-    
-    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    
-    // Add additional table data on new page
-    pdf.addPage();
-    pdf.setFontSize(16);
-    pdf.text("Estadísticas Completas 2025", 14, 20);
-    pdf.autoTable({
-      startY: 30,
-      head: [['Indicador', 'Valor']],
-      body: [
-        ['Captura Total', `${kpiData.totalCatch2025.toLocaleString()} TM`],
-        ['Cuota Asignada', `${kpiData.quotaAssigned.toLocaleString()} TM`],
-        ['Embarcaciones Activas', kpiData.activeVessels],
-        ['Zona Principal', kpiData.topZone],
-      ],
-      theme: 'grid',
-      headStyles: { fillColor: [0, 51, 102] }
-    });
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      
+      pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      
+      pdf.addPage();
+      pdf.setFontSize(16);
+      pdf.text("Estadísticas Completas 2025", 14, 20);
+      
+      autoTable(pdf, {
+        startY: 30,
+        head: [['Indicador', 'Valor']],
+        body: [
+          ['Captura Total', `${kpiData.totalCatch2025.toLocaleString()} TM`],
+          ['Cuota Asignada', `${kpiData.quotaAssigned.toLocaleString()} TM`],
+          ['Embarcaciones Activas', kpiData.activeVessels],
+          ['Zona Principal', kpiData.topZone],
+        ],
+        theme: 'grid',
+        headStyles: { fillColor: [0, 51, 102] }
+      });
 
-    pdf.save('Reporte_PRODUCE_2025.pdf');
+      pdf.save('Reporte_PRODUCE_2025.pdf');
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Hubo un error al generar el PDF. Revisa la consola para más detalles.");
+    }
   };
 
   return (
