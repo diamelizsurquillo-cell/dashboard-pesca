@@ -39,7 +39,61 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
+  transition: margin-left 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.sidebar.hidden {
+  margin-left: -250px;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.topbar-title {
+  font-size: 1.17em;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+  }
+  
+  .sidebar.hidden {
+    margin-left: 0;
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .mobile-close-btn {
+    display: block !important;
+  }
+  
+  .topbar-title {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .topbar {
+    padding: 0 10px;
+  }
 }
 
 .sidebar-header {

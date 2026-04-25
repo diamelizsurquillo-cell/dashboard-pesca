@@ -1,11 +1,21 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { LayoutDashboard, Ship, Map as MapIcon, FileText, Anchor } from 'lucide-react';
+import { LayoutDashboard, Ship, Map as MapIcon, FileText, Anchor, Menu, X } from 'lucide-react';
 
 const DashboardLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="dashboard-container">
-      <aside className="sidebar">
-        <div className="sidebar-header">
+      <aside className={`sidebar ${!isSidebarOpen ? 'hidden' : ''}`}>
+        <div className="sidebar-header" style={{ position: 'relative' }}>
+          <button 
+            className="mobile-close-btn" 
+            onClick={() => setIsSidebarOpen(false)}
+            style={{ position: 'absolute', top: '10px', right: '10px', background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', display: 'none' }}
+          >
+            <X size={24} />
+          </button>
           <Anchor size={40} color="white" />
           <h2>PRODUCE</h2>
           <p style={{ fontSize: '0.8rem', marginTop: '5px', color: '#E6F0FA' }}>Pesquería Anchoveta 2025</p>
@@ -39,10 +49,21 @@ const DashboardLayout = () => {
           </ul>
         </nav>
       </aside>
+
+      {isSidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}></div>
+      )}
+
       <main className="main-content">
         <header className="topbar">
-          <div className="search-bar">
-             <h3 style={{color: 'var(--primary-blue)'}}>Dashboard Interactivo de Seguimiento</h3>
+          <div className="search-bar" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+             <button 
+               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+               style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--primary-blue)', padding: '5px' }}
+             >
+               <Menu size={24} />
+             </button>
+             <h3 style={{color: 'var(--primary-blue)'}} className="topbar-title">Dashboard Interactivo de Seguimiento</h3>
           </div>
           <div className="user-profile">
             <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>ES | EN</span>
