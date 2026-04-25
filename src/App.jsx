@@ -4,10 +4,12 @@ import Overview from './pages/Overview';
 import Vessels from './pages/Vessels';
 import MapView from './pages/MapView';
 import Reports from './pages/Reports';
+import LegalModal from './components/LegalModal';
 
 function App() {
   return (
     <BrowserRouter>
+      <LegalModal />
       <Routes>
         <Route path="/" element={<DashboardLayout />}>
           <Route index element={<Overview />} />

@@ -222,3 +222,95 @@ th {
   border-radius: 8px;
   overflow: hidden;
 }
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--alert-red);
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.modal-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: var(--text-secondary);
+}
+
+.modal-text strong {
+  color: var(--text-primary);
+}
+
+.modal-warning-box {
+  background: var(--light-yellow);
+  border: 1px solid var(--warning-yellow);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+}
+
+.modal-warning-box p {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary-blue);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.modal-link:hover {
+  color: var(--primary-blue);
+}
+
+.modal-btn-accept {
+  width: 100%;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-btn-accept:hover {
+  background: var(--secondary-blue);
+}
