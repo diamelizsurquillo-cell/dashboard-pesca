@@ -63,38 +63,36 @@ const Vessels = () => {
       </div>
 
       <div style={{ position: 'relative', zIndex: 2 }}>
-        <div className="filters-bar" style={{ justifyContent: 'space-between', background: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(8px)' }}>
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexWrap: 'wrap', flex: 1 }}>
-            <div style={{ position: 'relative', flex: '1 1 200px' }}>
-              <input 
-                type="text" 
-                placeholder="Buscar embarcación, matrícula..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ paddingLeft: '30px', width: '100%', background: 'rgba(255, 255, 255, 0.8)' }}
-              />
-              <Search size={16} style={{ position: 'absolute', left: '10px', top: '10px', color: 'var(--text-secondary)' }} />
-            </div>
-            <select 
-              style={{ background: 'rgba(255, 255, 255, 0.8)', flex: '1 1 130px' }}
-              value={estadoFilter}
-              onChange={(e) => setEstadoFilter(e.target.value)}
-            >
-              <option value="Todos">Estado: Todos</option>
-              <option value="Activa">Activa</option>
-              <option value="Inactiva">Inactiva</option>
-            </select>
-            <select 
-              style={{ background: 'rgba(255, 255, 255, 0.8)', flex: '1 1 130px' }}
-              value={flotaFilter}
-              onChange={(e) => setFlotaFilter(e.target.value)}
-            >
-              <option value="Todas">Flota: Todas</option>
-              <option value="Industrial">Industrial</option>
-              <option value="Artesanal">Artesanal</option>
-            </select>
+        <div className="filters-bar" style={{ background: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(8px)', alignItems: 'center' }}>
+          <div style={{ position: 'relative', flex: '1 1 200px' }}>
+            <input 
+              type="text" 
+              placeholder="Buscar embarcación, matrícula..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{ paddingLeft: '30px', width: '100%', background: 'rgba(255, 255, 255, 0.8)' }}
+            />
+            <Search size={16} style={{ position: 'absolute', left: '10px', top: '10px', color: 'var(--text-secondary)' }} />
           </div>
-          <button className="btn" onClick={exportToExcel}>
+          <select 
+            style={{ background: 'rgba(255, 255, 255, 0.8)', flex: '1 1 130px' }}
+            value={estadoFilter}
+            onChange={(e) => setEstadoFilter(e.target.value)}
+          >
+            <option value="Todos">Estado: Todos</option>
+            <option value="Activa">Activa</option>
+            <option value="Inactiva">Inactiva</option>
+          </select>
+          <select 
+            style={{ background: 'rgba(255, 255, 255, 0.8)', flex: '1 1 130px' }}
+            value={flotaFilter}
+            onChange={(e) => setFlotaFilter(e.target.value)}
+          >
+            <option value="Todas">Flota: Todas</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Artesanal">Artesanal</option>
+          </select>
+          <button className="btn" onClick={exportToExcel} style={{ flex: '1 1 150px', justifyContent: 'center' }}>
             <Download size={16} /> Exportar Excel
           </button>
         </div>
